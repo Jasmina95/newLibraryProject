@@ -43,13 +43,13 @@ namespace MyWebAPICore.Services.BookService
             {
                 transaction.Rollback();
                 errors.Add(ValidationErrorCode.CreateBookTitle, $"{ex.Message}: Book title already exists!");
-                throw new CreateBookExceptionHandler(errors);
+                throw new BookServiceExceptionHandler(errors);
             }
             catch(ReferenceConstraintException ex)
             {
                 transaction?.Rollback();
                 errors.Add(ValidationErrorCode.ReferenceAuthorsAndPublisher, $"{ex.Message}: Publisher doesn't exist in the database!");
-                throw new CreateBookExceptionHandler(errors);
+                throw new BookServiceExceptionHandler(errors);
             }
             
             var savedBook = await _context.Books.FirstOrDefaultAsync(b => b.Title == newBook.Title);
@@ -66,7 +66,7 @@ namespace MyWebAPICore.Services.BookService
                     {
                         transaction.Rollback();
                         errors.Add(ValidationErrorCode.ReferenceAuthorsAndPublisher, $"{ex.Message}: Check author ids! Some of them might not exist in the database.");
-                        throw new CreateBookExceptionHandler(errors);
+                        throw new BookServiceExceptionHandler(errors);
                     }
               
                 }
@@ -102,7 +102,7 @@ namespace MyWebAPICore.Services.BookService
                     var errors = new Dictionary<ValidationErrorCode, string>();
 
                     errors.Add(ValidationErrorCode.BookNotFound, "Book not found!");
-                    throw new CreateBookExceptionHandler(errors);
+                    throw new BookServiceExceptionHandler(errors);
                 }
             
         }
@@ -134,7 +134,7 @@ namespace MyWebAPICore.Services.BookService
             {
                 var errors = new Dictionary<ValidationErrorCode, string>();
                 errors.Add(ValidationErrorCode.BookNotFound, "Book not found!");
-                throw new CreateBookExceptionHandler(errors);
+                throw new BookServiceExceptionHandler(errors);
             }
         }
 
@@ -244,7 +244,7 @@ namespace MyWebAPICore.Services.BookService
                 {
                     transaction.Rollback();
                     errors.Add(ValidationErrorCode.ReferenceAuthorsAndPublisher, "Publisher doesn't exist!");
-                    throw new CreateBookExceptionHandler(errors);
+                    throw new BookServiceExceptionHandler(errors);
                 }
                 
                 try
@@ -255,7 +255,7 @@ namespace MyWebAPICore.Services.BookService
                 {
                     transaction.Rollback();
                     errors.Add(ValidationErrorCode.CreateBookTitle, $"{ex.Message}: Book title already exists!");
-                    throw new CreateBookExceptionHandler(errors);
+                    throw new BookServiceExceptionHandler(errors);
                 }
                 
                 ICollection<AuthorBook> authorBooks = await _context.AuthorBooks.Where(ab => ab.BookId == book.Id).ToListAsync();
@@ -285,7 +285,7 @@ namespace MyWebAPICore.Services.BookService
                         {
                             transaction.Rollback();
                             errors.Add(ValidationErrorCode.ReferenceAuthorsAndPublisher, $"{ex.Message}: Check the ids of Authors!");
-                            throw new CreateBookExceptionHandler(errors);
+                            throw new BookServiceExceptionHandler(errors);
                         }
                     }
                 }
@@ -304,7 +304,7 @@ namespace MyWebAPICore.Services.BookService
             {
                 transaction.Rollback();
                 errors.Add(ValidationErrorCode.BookNotFound, "Book not found!");
-                throw new CreateBookExceptionHandler(errors);
+                throw new BookServiceExceptionHandler(errors);
             }
         }
     }

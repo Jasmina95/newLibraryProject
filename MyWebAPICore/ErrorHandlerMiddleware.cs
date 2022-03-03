@@ -27,7 +27,7 @@ namespace MyWebAPICore
 
                 switch (error)
                 {
-                    case CreateBookExceptionHandler e:
+                    case BookServiceExceptionHandler e:
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         result = JsonSerializer.Serialize(new { e.Errors });
                         break;
