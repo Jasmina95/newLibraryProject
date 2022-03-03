@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "o/lESrT3aKF3saLS89F0TJa7C2AK28jh3GQwXgphuu4=",
+  "Source": "MyWebAPICore",
+  "BasePath": "_content/MyWebAPICore",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "MyWebAPICore\\wwwroot",
+      "Source": "MyWebAPICore",
+      "ContentRoot": "C:\\Users\\JasminaZejnilovic\\newLibraryProject\\MyWebAPICore\\wwwroot\\",
+      "BasePath": "_content/MyWebAPICore",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

@@ -1,0 +1,7 @@
+﻿namespace MyWebAPICore.Contracts
+{
+    public class ErrorResponse
+    {
+        public ICollection<ErrorModel> Errors { get; set; } = new List<ErrorModel>();
+    }
+}
